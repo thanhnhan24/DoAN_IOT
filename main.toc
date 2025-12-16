@@ -1,0 +1,23 @@
+\babel@toc {vietnamese}{}\relax 
+\contentsline {section}{\numberline {1}Giới thiệu}{4}{}%
+\contentsline {section}{\numberline {2}Cơ sở lý thuyết}{4}{}%
+\contentsline {subsection}{\numberline {2.1}Động lực nghiên cứu}{4}{}%
+\contentsline {subsection}{\numberline {2.2}Đặt vấn đề}{4}{}%
+\contentsline {subsection}{\numberline {2.3}Đóng góp chính}{4}{}%
+\contentsline {subsection}{\numberline {2.4}Các nghiên cứu liên quan}{5}{}%
+\contentsline {section}{\numberline {3}Thiết kế hệ thống}{5}{}%
+\contentsline {subsection}{\numberline {3.1}Hệ thống tổng thể}{5}{}%
+\contentsline {subsubsection}{\numberline {3.1.1}\textbf {Phân hệ Edge node (Thu thập và xử lý)}}{5}{}%
+\contentsline {subsubsection}{\numberline {3.1.2}\textbf {Phân hệ Gateway \& Cloud (Trung chuyển \& Lưu trữ)}}{6}{}%
+\contentsline {subsubsection}{\numberline {3.1.3}\textbf {Phân hệ Quản lý (Application)}}{6}{}%
+\contentsline {subsection}{\numberline {3.2}Thiết kế phần cứng}{7}{}%
+\contentsline {subsubsection}{\numberline {3.2.1}Cấu hình Edge Node}{7}{}%
+\contentsline {paragraph}{Khối xử lý AI (AI Processing Unit)}{7}{}%
+\contentsline {paragraph}{Khối điều khiển và cảm biến (Control \& Sensor Unit)}{7}{}%
+\contentsline {paragraph}{Khối điều khiển chấp hành (Actuator Control)}{8}{}%
+\contentsline {paragraph}{Giao tiếp nội bộ và truyền thông}{8}{}%
+\contentsline {subsubsection}{\numberline {3.2.2}Thiết kế LoRa Gateway}{8}{}%
+\contentsline {subsection}{\numberline {3.3}Thiết kế phần mềm}{8}{}%
+\contentsline {subsubsection}{\numberline {3.3.1}Giải thuật xử lý AI tại biên (Edge AI -- Jetson Nano)}{8}{}%
+\contentsline {section}{\numberline {4}Kết quả thực nghiệm}{10}{}%
+\contentsline {section}{\numberline {5}Kết luận}{10}{}%
