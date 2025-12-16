@@ -175,16 +175,31 @@ Khối điều khiển chấp hành cho phép Raspberry Pico điều khiển cá
 \paragraph{Giao tiếp nội bộ và truyền thông}
 Jetson Nano và Raspberry Pico trao đổi dữ liệu nội bộ thông qua giao tiếp UART/Serial, trong đó Jetson gửi kết quả nhận diện (ID sinh viên) về Pico. Pico kết nối với module LoRa E32 DTU (433 MHz, chip SX1278) thông qua UART để truyền dữ liệu cảm biến và dữ liệu nhận dạng về Gateway.
 
-\begin{figure}[!t]
-\centering
-\includegraphics[width=0.95\linewidth]{edge_node_schematic.pdf}
-\caption{Sơ đồ nguyên lý phần cứng của Edge Node.}
-\label{fig:edge_schematic}
-\end{figure}
 
 \subsubsection{Thiết kế LoRa Gateway}
 
 Gateway đóng vai trò là cầu nối giữa mạng LoRa và hệ thống quản lý trung tâm. Gateway sử dụng module LoRa E32 DTU để thu nhận các gói tin từ các Edge Node và truyền dữ liệu qua giao tiếp USB/Serial tới máy tính quản trị, nơi dữ liệu được giải mã, lưu trữ và hiển thị trên giao diện Dashboard.
+
+\subsection{Thiết kế phần mềm}
+\subsubsection{Giải thuật xử lý AI tại biên (Edge AI -- Jetson Nano)}
+
+Giải thuật xử lý AI tại biên được triển khai trực tiếp trên nền tảng NVIDIA Jetson Nano nhằm thực hiện nhận diện khuôn mặt và xác định danh tính sinh viên ngay tại Edge Node, qua đó giảm thiểu phụ thuộc vào hạ tầng mạng trung tâm. Luồng xử lý dữ liệu hình ảnh được thiết kế theo chuỗi tuần tự, như minh họa trong Hình~\ref{fig:edge_ai_flow}.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.55\linewidth]{Báo cáo Khoa học-TT-TK-Edge AI Processing Algorithm.png}
+\caption{Luồng xử lý AI tại biên trên Jetson Nano.}
+\label{fig:edge_ai_flow}
+\end{figure}
+
+Đầu tiên, Jetson Nano thu nhận luồng hình ảnh thời gian thực từ camera thông qua thư viện OpenCV. Các khung hình sau khi được tiền xử lý cơ bản sẽ được đưa vào mô hình YOLOv8 để thực hiện phát hiện khuôn mặt. Mô hình YOLOv8 cho phép xác định nhanh vị trí khuôn mặt trong ảnh với độ chính xác cao và độ trễ thấp, phù hợp cho các ứng dụng thời gian thực tại biên.
+
+Sau khi khuôn mặt được phát hiện, vùng ảnh tương ứng sẽ được cắt (crop) từ khung hình gốc và đưa vào mô hình FaceNet để trích xuất vector đặc trưng. FaceNet ánh xạ mỗi khuôn mặt thành một vector đặc trưng có kích thước cố định trong không gian đặc trưng, trong đó khoảng cách giữa các vector phản ánh mức độ tương đồng giữa các khuôn mặt. Vector đặc trưng thu được sau đó được so khớp với cơ sở dữ liệu cục bộ lưu trữ trên Jetson Nano bằng các phép đo khoảng cách (ví dụ: Euclidean distance hoặc cosine similarity) để xác định danh tính sinh viên tương ứng (MSSV).
+
+Một điểm nhấn quan trọng của hệ thống là cơ chế bảo mật dữ liệu ngay tại biên. Sau khi quá trình nhận diện hoàn tất và chỉ còn lại kết quả định danh (MSSV), toàn bộ dữ liệu hình ảnh và vector đặc trưng không được truyền ra khỏi Jetson Nano. Trước khi gửi MSSV sang Raspberry Pico thông qua giao tiếp UART, dữ liệu này được mã hóa ngay lập tức bằng thuật toán AES với độ dài khóa 128 hoặc 256 bit. Cơ chế mã hóa này đảm bảo rằng thông tin sinh viên không thể bị khai thác ngay cả trong trường hợp gói tin bị bắt trên đường truyền LoRa.
+
+Việc kết hợp xử lý AI tại biên và mã hóa dữ liệu trước truyền thông giúp hệ thống vừa đảm bảo độ trễ thấp, vừa nâng cao mức độ riêng tư và an toàn thông tin. Kiến trúc này đặc biệt phù hợp với các ứng dụng Smart Campus, nơi yêu cầu cao về bảo mật dữ liệu cá nhân và khả năng mở rộng hệ thống.
+
 
 \section{Kết quả thực nghiệm}
 \section{Kết luận}
