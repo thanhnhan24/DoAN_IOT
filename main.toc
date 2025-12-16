@@ -19,5 +19,5 @@
 \contentsline {subsubsection}{\numberline {3.2.2}Thiết kế LoRa Gateway}{8}{}%
 \contentsline {subsection}{\numberline {3.3}Thiết kế phần mềm}{8}{}%
 \contentsline {subsubsection}{\numberline {3.3.1}Giải thuật xử lý AI tại biên (Edge AI -- Jetson Nano)}{8}{}%
-\contentsline {section}{\numberline {4}Kết quả thực nghiệm}{10}{}%
-\contentsline {section}{\numberline {5}Kết luận}{10}{}%
+\contentsline {section}{\numberline {4}Kết quả thực nghiệm}{9}{}%
+\contentsline {section}{\numberline {5}Kết luận}{9}{}%

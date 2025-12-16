@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.17)  17 DEC 2025 04:54
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.17)  17 DEC 2025 05:51
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -651,16 +651,16 @@ File: SCH_Schematic1_1-P1_2025-12-17.png Graphic file (type png)
 Package pdftex.def Info: SCH_Schematic1_1-P1_2025-12-17.png  used on input line 157.
 (pdftex.def)             Requested size: 418.96548pt x 296.17659pt.
  [7 <./SCH_Schematic1_1-P1_2025-12-17.png>]
-<Báo cáo Khoa học-TT-TK-Edge AI Processing Algorithm.png, id=38, 3904.5875pt x 10178.025pt>
-File: Báo cáo Khoa học-TT-TK-Edge AI Processing Algorithm.png Graphic file (type png)
-<use Báo cáo Khoa học-TT-TK-Edge AI Processing Algorithm.png>
-Package pdftex.def Info: Báo cáo Khoa học-TT-TK-Edge AI Processing Algorithm.png  used on input line 190.
-(pdftex.def)             Requested size: 176.40439pt x 459.6997pt.
+<Báo cáo Khoa học-TT-TK-Edge AI Processing Algorithm (3).png, id=38, 10268.3625pt x 10870.6125pt>
+File: Báo cáo Khoa học-TT-TK-Edge AI Processing Algorithm (3).png Graphic file (type png)
+<use Báo cáo Khoa học-TT-TK-Edge AI Processing Algorithm (3).png>
+Package pdftex.def Info: Báo cáo Khoa học-TT-TK-Edge AI Processing Algorithm (3).png  used on input line 190.
+(pdftex.def)             Requested size: 352.81552pt x 373.37782pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[8] (main.bbl [9 <./Báo cáo Khoa học-TT-TK-Edge AI Processing Algorithm.png>]) [10] (main.aux)
+[8] (main.bbl [9 <./Báo cáo Khoa học-TT-TK-Edge AI Processing Algorithm (3).png>]) [10] (main.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-11-06>
@@ -668,14 +668,14 @@ L3 programming layer <2025-11-06>
  ) 
 Here is how much of TeX's memory you used:
  14360 strings out of 467870
- 294104 string characters out of 5415898
+ 294132 string characters out of 5415898
  681872 words of memory out of 5000000
  42994 multiletter control sequences out of 15000+600000
  637476 words of font info for 57 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  84i,8n,104p,1239b,373s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\Thanh Nhan\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk><C:/Users/Thanh Nhan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/Thanh Nhan/AppData/Local/Programs/MiKTeX/fonts/type1/vntex/vnr/vnbx12.pfb><C:/Users/Thanh Nhan/AppData/Local/Programs/MiKTeX/fonts/type1/vntex/vnr/vnr12.pfb><C:/Users/Thanh Nhan/AppData/Local/Programs/MiKTeX/fonts/type1/vntex/vnr/vnti12.pfb>
-Output written on main.pdf (10 pages, 1674009 bytes).
+Output written on main.pdf (10 pages, 2097879 bytes).
 PDF statistics:
  72 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
