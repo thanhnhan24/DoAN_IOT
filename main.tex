@@ -1,0 +1,194 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T5]{fontenc}
+\usepackage[vietnamese]{babel}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{indentfirst}
+
+
+
+
+\geometry{
+  top=2.5cm,
+  bottom=2.5cm,
+  left=3cm,
+  right=2.5cm
+}
+
+\begin{document}
+
+\begin{tikzpicture}[remember picture,overlay]
+  \draw[line width=1.2pt]
+    ($(current page.north west)+(2cm,-2cm)$)
+    rectangle
+    ($(current page.south east)+(-2cm,2cm)$);
+\end{tikzpicture}
+
+\thispagestyle{empty}
+
+\begin{center}
+
+\textbf{BỘ GIÁO DỤC VÀ ĐÀO TẠO}\\
+\textbf{TRƯỜNG ĐẠI HỌC CÔNG NGHỆ TP. HỒ CHÍ MINH}\\
+\textbf{VIỆN KỸ THUẬT HUTECH}
+
+\vspace{1.5cm}
+
+% Logo
+\includegraphics[width=4cm]{Logo_Hutech.png}
+
+\vspace{1.5cm}
+
+{\Large\textbf{BÁO CÁO}}
+
+\vspace{0.5cm}
+
+{\Large\textbf{ĐỒ ÁN IOT}}
+
+\vspace{1.5cm}
+
+{\Large\textbf{Hệ thống giám sát môi trường lớp học kết hợp điểm danh ứng dụng
+YOLO và công nghệ LoRa}}
+
+\vspace{1cm}
+
+\begin{flushleft}
+\setstretch{1.4}
+\hspace{3cm}\textbf{Sinh viên thực hiện:}\\
+\hspace{3.5cm}
+\begin{tabular}{@{}l p{6cm} l@{}}
+1. & Nguyễn Thanh Nhân      & MSSV: 2286301149 \\
+2. & Hồ Đức An              & MSSV: 2286300050 \\
+3. & Nguyễn Vũ Huy Khôi     & MSSV: 2286300027 \\
+\end{tabular}
+
+\vspace{0.3cm}
+
+\hspace{3cm}\textbf{Ngành:} Robot \& Trí tuệ nhân tạo\\
+\hspace{3cm}\textbf{Lớp:} 22DRTA1\\
+\hspace{3cm}\textbf{Giảng viên hướng dẫn:} ThS. Ngô An Thuyên
+\end{flushleft}
+
+
+\vfill
+
+TP. Hồ Chí Minh, 2025
+
+\end{center}
+
+\clearpage
+\tableofcontents
+\newpage
+\clearpage
+\section*{LỜI CẢM ƠN}
+
+Trong quá trình thực hiện đồ án này, nhóm chúng em đã nhận được sự hướng dẫn, hỗ trợ và giúp đỡ tận tình từ nhiều cá nhân và tập thể.
+
+Trước hết, chúng em xin bày tỏ lòng biết ơn sâu sắc đến giảng viên hướng dẫn \textbf{ThS. Ngô An Thuyên}, người đã trực tiếp hướng dẫn, định hướng và đóng góp nhiều ý kiến quý báu giúp nhóm hoàn thành đồ án một cách hiệu quả. Những góp ý và sự tận tâm của thầy là nền tảng quan trọng giúp chúng em củng cố kiến thức chuyên môn và nâng cao kỹ năng nghiên cứu, thực hành.
+
+Chúng em cũng xin gửi lời cảm ơn đến quý thầy cô trong Khoa/Viện đã truyền đạt những kiến thức nền tảng và chuyên môn trong suốt quá trình học tập, tạo điều kiện thuận lợi để chúng em thực hiện đồ án này.
+
+Cuối cùng, nhóm xin cảm ơn gia đình, bạn bè đã luôn động viên, hỗ trợ tinh thần và tạo điều kiện để chúng em có thể tập trung hoàn thành đồ án đúng tiến độ.
+
+Mặc dù đã rất cố gắng, nhưng do thời gian và kiến thức còn hạn chế, đồ án không tránh khỏi những thiếu sót. Nhóm chúng em rất mong nhận được sự đóng góp và chỉ dẫn thêm từ quý thầy cô để đồ án được hoàn thiện hơn.
+
+Chúng em xin chân thành cảm ơn.
+
+\newpage
+
+\section{Giới thiệu}
+
+Nhu cầu quản lý sinh viên tự động trong Smart Campus ngày càng tăng; các giải pháp dựa trên WiFi hoặc điểm danh thủ công gặp phải các vấn đề như tắc nghẽn mạng và tính riêng tư.\\
+Báo cáo đề xuất hệ thống điểm danh kết hợp Edge-AI (NVIDIA Jetson Nano chạy YOLOv8 cho phát hiện khuôn mặt kết hợp FaceNet cho trích xuất đặc trưng) và truyền thông tầm xa năng lượng thấp bằng LoRa. Kiến trúc không đồng nhất (heterogeneous computing) được áp dụng: Jetson xử lý ảnh, Raspberry Pico thu/gói dữ liệu cảm biến và chuyển tiếp qua LoRa.\\
+Thực nghiệm cho thấy độ chính xác nhận diện đạt khoảng 9x\% (tùy dataset), tần suất truyền tin ổn định qua 4 tầng bê tông với PDR $>$ 90\% dưới cấu hình TX power hợp lý.\\
+Hệ thống hoạt động độc lập, giảm tải băng thông cho hạ tầng trung tâm và có khả năng triển khai diện rộng trong khuôn viên trường học.
+\section{Cơ sở lý thuyết}
+\subsection{Động lực nghiên cứu}
+Trong kỷ nguyên IoT, mô hình Tòa nhà thông minh (Smart Building) đang chuyển dịch từ tự động hóa đơn thuần sang khả năng thích ứng (adaptability) dựa trên dữ liệu cư dân thực tế. Việc nắm bắt chính xác số lượng và danh tính sinh viên trong thời gian thực là chìa khóa để tối ưu hóa năng lượng và quản lý cơ sở vật chất hiệu quả.\cite{buckman2014smart}
+\subsection{Đặt vấn đề}
+Tuy nhiên, việc thu thập dữ liệu trong các tòa nhà cao tầng gặp thách thức lớn về kết nối. Mạng Wifi thường tiêu tốn năng lượng cao và phạm vi phủ sóng hạn chế (<40m trong nhà). Công nghệ LoRa nổi lên như một giải pháp thay thế nhờ khả năng truyền xa, nhưng nghiên cứu của Xu et al. chỉ ra rằng tín hiệu LoRa trong môi trường bê tông cốt thép nhiều tầng (multi-floor) chịu sự suy hao lớn và biến động kênh truyền phức tạp, đòi hỏi thiết kế hệ thống phải được tối ưu hóa kỹ lưỡng.\cite{xu2019measurement} Hơn nữa, băng thông thấp của LoRa không cho phép truyền tải dữ liệu hình ảnh/video. Các kiến trúc truyền thống dựa trên Cloud computing gặp trở ngại về độ trễ và tắc nghẽn băng thông khi quy mô cảm biến tăng lên. Theo Fraga-Lamas et al., kiến trúc tính toán sương mù/tại biên (Fog/Edge Computing) là giải pháp thiết yếu cho các khuôn viên thông minh (Smart Campus) để đảm bảo độ trễ thấp và giảm tải cho hạ tầng mạng. \cite{fraga2019design}
+\subsection{Đóng góp chính}
+Để giải quyết các thách thức trên, bài báo đề xuất một hệ thống điểm danh lai ghép (hybrid approach). Chúng tôi sử dụng Jetson Nano để xử lý AI tại biên, trích xuất thông tin điểm danh và chỉ gửi dữ liệu văn bản gói gọn qua mạng LoRa riêng biệt. Đặc biệt, nghiên cứu thực hiện so sánh thực nghiệm giữa mô hình YOLOv8 thuần và kiến trúc đường ống YOLOv8 kết hợp FaceNet. Kết quả nhằm chứng minh rằng kiến trúc hai giai đoạn (two-stage pipeline) mang lại khả năng mở rộng (scalability) và tính thích ứng tốt hơn cho môi trường giáo dục thay đổi liên tục, khắc phục nhược điểm phải huấn luyện lại (re-training) của các mô hình truyền thống.
+\subsection{Các nghiên cứu liên quan}
+Bất chấp những tiến bộ đáng kể trong các hệ thống điểm danh thông minh đã thảo luận ở trên, vẫn tồn tại một khoảng trống quan trọng trong việc kết nối hiệu quả giữa nhận diện sinh trắc học độ chính xác cao với các giao thức truyền thông băng thông thấp, tầm xa trong môi trường tòa nhà nhiều tầng.
+
+Các giải pháp dựa trên thị giác máy tính hiện có, chẳng hạn như nghiên cứu của Giau et al. (2024) , đã chứng minh độ chính xác cao khi triển khai các mô hình học sâu như YOLOv8 và FaceNet trên thiết bị biên (Jetson Nano). Tuy nhiên, các hệ thống này thường phụ thuộc vào hạ tầng mạng băng thông cao (ví dụ: Wi-Fi hoặc Ethernet) để truyền dữ liệu video hoặc đồng bộ hóa cơ sở dữ liệu lớn với đám mây, khiến chúng không phù hợp với những khu vực có kết nối internet không ổn định hoặc bị giới hạn băng thông nghiêm ngặt.\cite{pham2024effective}
+
+Ngược lại, các nghiên cứu tập trung vào công nghệ LoRa trong tòa nhà, như Khurshid et al. (2025)  và Liang et al. (2020) , đã chứng minh sự vượt trội về vùng phủ sóng và khả năng xuyên bê tông cốt thép so với Wi-Fi. Tuy nhiên, các triển khai này thường sử dụng các phương pháp định danh đơn giản (ví dụ: thẻ RFID) hoặc chỉ truyền dữ liệu môi trường dạng vô hướng. Chúng thiếu khả năng thực hiện xác thực sinh trắc học phức tạp, khiến hệ thống dễ bị điểm danh hộ ("buddy punching")  và không đáp ứng được yêu cầu về "khả năng thích ứng" (adaptability) của các tòa nhà thông minh hiện đại như định nghĩa của Buckman et al. (2014) .\cite{khurshid2025fusion} \cite{liang2020performance} \cite{buckman2014smart}
+
+
+Do đó, hiện nay vẫn thiếu các nghiên cứu về kiến trúc lai (hybrid architectures) tận dụng sức mạnh tính toán của điện toán biên không đồng nhất (Jetson Nano kết hợp với vi điều khiển) để xử lý dữ liệu hình ảnh phức tạp ngay tại chỗ và chỉ truyền các gói tin văn bản nhẹ, đã được tối ưu hóa qua LoRa. Nghiên cứu này nhằm mục đích lấp đầy khoảng trống đó bằng cách đề xuất một hệ thống Edge-AI dựa trên LoRa, đảm bảo cả khả năng nhận diện khuôn mặt chính xác cao và khả năng truyền thông tin cậy, năng lượng thấp trong các tòa nhà giáo dục nhiều tầng.
+
+\section{Thiết kế hệ thống}
+\subsection{Hệ thống tổng thể}
+Ứng dụng trên máy tính quản trị (Administrator GUI) sẽ kết nối trực tiếp tới Firebase để lấy dữ liệu hiển thị cho quản lý tòa nhà (Building Manager) và quản lý tầng (Floor Manager). Giải pháp này cho phép giám sát hệ thống từ xa qua Internet mà không phụ thuộc vào vị trí vật lý của thiết bị Gateway.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.8\textwidth]{Báo cáo Khoa học-TT-TK-HARDWARE (4).png}
+  \caption{Sơ đồ khối hệ thống đề xuất}
+  \label{fig:block}
+\end{figure}
+\subsubsection{\textbf{Phân hệ Edge node (Thu thập và xử lý)}} 
+Sử dụng Jetson Nano tích hợp AI (YOLOv8) để nhận diện khuôn mặt, FaceNet để xác minh danh tính và Raspberry Pi Pico để thu thập thông số môi trường/điện năng. Dữ liệu sau xử lý được đóng gói và truyền đi qua giao thức LoRa để đảm bảo khoảng cách xa và tiết kiệm năng lượng.
+\subsubsection{\textbf{Phân hệ Gateway \& Cloud (Trung chuyển \& Lưu trữ)}}
+\begin{itemize}
+  \item \textbf{LoRa Gateway:} Đóng vai trò trạm thu nhận tín hiệu từ các Edge Node. Tại đây, dữ liệu được lưu trữ cục bộ vào Internal Database (dự phòng sự cố mạng), đồng thời được đồng bộ hóa thời gian thực (Real-time) lên \textbf{Firebase Cloud}.
+
+  \item \textbf{Firebase Realtime DB:} Là cầu nối trung gian, giúp lưu trữ dữ liệu tập trung và đảm bảo tính toàn vẹn dữ liệu.
+\end{itemize}
+
+\subsubsection{\textbf{Phân hệ Quản lý (Application)}}
+Ứng dụng trên máy tính quản trị (Administrator GUI) sẽ kết nối trực tiếp tới Firebase để lấy dữ liệu hiển thị cho quản lý tòa nhà (Building Manager) và quản lý tầng (Floor Manager). Giải pháp này cho phép giám sát hệ thống từ xa qua Internet mà không phụ thuộc vào vị trí vật lý của thiết bị Gateway.
+
+\subsection{Thiết kế phần cứng}
+
+\subsubsection{Cấu hình Edge Node}
+
+Mỗi Edge Node được thiết kế như một tổ hợp phần cứng nhằm cân bằng giữa khả năng xử lý AI tại biên và mức tiêu thụ năng lượng thấp. Kiến trúc phần cứng của Edge Node bao gồm bốn khối chức năng chính: khối xử lý AI, khối điều khiển và cảm biến, khối điều khiển chấp hành và khối giao tiếp truyền thông. Sơ đồ khối tổng thể của Edge Node được trình bày trong Hình~\ref{fig:edge_block}.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.95\linewidth]{SCH_Schematic1_1-P1_2025-12-17.png}
+\caption{Sơ đồ khối phần cứng của Edge Node.}
+\label{fig:edge_block}
+\end{figure}
+
+\paragraph{Khối xử lý AI (AI Processing Unit)}
+Khối xử lý AI sử dụng nền tảng NVIDIA Jetson Nano làm bộ xử lý trung tâm cho các tác vụ thị giác máy tính. Jetson Nano được trang bị GPU Maxwell 128 nhân và CPU ARM Cortex-A57 bốn nhân, cho phép thu nhận hình ảnh từ camera, phát hiện khuôn mặt bằng mô hình YOLOv8 và trích xuất vector đặc trưng bằng FaceNet. Việc xử lý hình ảnh trực tiếp tại biên giúp giảm tải băng thông truyền thông và tăng cường bảo mật dữ liệu, do hình ảnh thô không cần truyền về hệ thống trung tâm.
+
+\paragraph{Khối điều khiển và cảm biến (Control \& Sensor Unit)}
+Khối điều khiển và cảm biến sử dụng vi điều khiển Raspberry Pico (chip RP2040) làm trung tâm điều phối, chịu trách nhiệm thu thập dữ liệu môi trường, giám sát tiêu thụ năng lượng và điều khiển các thiết bị ngoại vi. Pico được lựa chọn nhờ khả năng hỗ trợ đa dạng các chuẩn giao tiếp như I2C, UART và SPI, đồng thời có mức tiêu thụ năng lượng thấp.
+
+Các cảm biến môi trường được tích hợp thông qua module mở rộng Waveshare Pico Environment Sensor và giao tiếp với Pico thông qua bus I2C dùng chung. Các cảm biến chính bao gồm BME280 (đo nhiệt độ, độ ẩm và áp suất), TSL2591 (đo cường độ ánh sáng), LTR390-UV-1 và SGP40 (đo tia cực tím và nồng độ hợp chất hữu cơ dễ bay hơi). Do sử dụng Sensor HAT thương mại, các mạch điều hòa tín hiệu và điện trở kéo lên bus I2C đã được tích hợp sẵn.
+
+Để giám sát tiêu thụ điện năng của phòng học, hệ thống sử dụng module PZEM-016 giao tiếp với Pico thông qua giao thức Modbus-RTU trên nền tảng RS485. Do Pico hoạt động ở mức logic UART TTL, một mạch chuyển đổi UART TTL sang RS485 được sử dụng nhằm đảm bảo tương thích điện áp và chuẩn truyền thông.
+
+\paragraph{Khối điều khiển chấp hành (Actuator Control)}
+Khối điều khiển chấp hành cho phép Raspberry Pico điều khiển các thiết bị điện trong phòng học thông qua các module relay công suất. Tín hiệu điều khiển từ Pico được cách ly quang bằng optocoupler và khuếch đại bằng transistor, giúp đảm bảo an toàn cho khối điều khiển và giảm nhiễu từ tải điện xoay chiều.
+
+\paragraph{Giao tiếp nội bộ và truyền thông}
+Jetson Nano và Raspberry Pico trao đổi dữ liệu nội bộ thông qua giao tiếp UART/Serial, trong đó Jetson gửi kết quả nhận diện (ID sinh viên) về Pico. Pico kết nối với module LoRa E32 DTU (433 MHz, chip SX1278) thông qua UART để truyền dữ liệu cảm biến và dữ liệu nhận dạng về Gateway.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=0.95\linewidth]{edge_node_schematic.pdf}
+\caption{Sơ đồ nguyên lý phần cứng của Edge Node.}
+\label{fig:edge_schematic}
+\end{figure}
+
+\subsubsection{Thiết kế LoRa Gateway}
+
+Gateway đóng vai trò là cầu nối giữa mạng LoRa và hệ thống quản lý trung tâm. Gateway sử dụng module LoRa E32 DTU để thu nhận các gói tin từ các Edge Node và truyền dữ liệu qua giao tiếp USB/Serial tới máy tính quản trị, nơi dữ liệu được giải mã, lưu trữ và hiển thị trên giao diện Dashboard.
+
+\section{Kết quả thực nghiệm}
+\section{Kết luận}
+\bibliographystyle{IEEEtran} % hoặc cái style bạn cần
+\bibliography{sample} % đúng tên file .bib của bạn
+\end{document}
+
