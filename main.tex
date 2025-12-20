@@ -81,10 +81,26 @@ TP. Hồ Chí Minh, 2025
 
 \end{center}
 
-\clearpage
-\tableofcontents
 \newpage
-\clearpage
+\pagenumbering{roman} % Đánh số trang La Mã (i, ii, iii) cho phần đầu
+
+% 1. Mục lục chính
+\tableofcontents
+\newpage % Ngắt trang sau mục lục
+
+% 2. Danh mục hình ảnh
+\addcontentsline{toc}{section}{\listfigurename} % (Tùy chọn) Thêm dòng này để hiện Danh mục hình ảnh trong Mục lục
+\listoffigures
+\newpage % Ngắt trang
+
+% 3. Danh mục bảng
+\addcontentsline{toc}{section}{\listtablename} % (Tùy chọn) Thêm dòng này để hiện Danh mục bảng trong Mục lục
+\listoftables
+\newpage % Ngắt trang
+
+% --- BẮT ĐẦU NỘI DUNG CHÍNH ---
+\pagenumbering{arabic} % Chuyển sang đánh số trang thường (1, 2, 3...)
+\setcounter{page}{1}   % Bắt đầu lại từ trang 1
 \section*{LỜI CẢM ƠN}
 
 Trong quá trình thực hiện đồ án này, nhóm chúng em đã nhận được sự hướng dẫn, hỗ trợ và giúp đỡ tận tình từ nhiều cá nhân và tập thể.
@@ -305,7 +321,99 @@ Bảng \ref{tab:lora_results} dưới đây tóm tắt các chỉ số hiệu n�
     \item \textbf{Độ trễ (Latency):} Việc sử dụng SF12 (để tối ưu khoảng cách truyền và khả năng xuyên tường) kết hợp với payload lớn (~50 byte) làm tăng thời gian truyền sóng (Time-on-Air), dẫn đến RTT ở mức cao (~1,45s). Tuy nhiên, kết quả này hoàn toàn đáp ứng được yêu cầu của bài toán thu thập dữ liệu môi trường và điểm danh sinh viên, vốn không đòi hỏi độ trễ cực thấp (Ultra-low latency) như các ứng dụng điều khiển thời gian thực.
 \end{itemize}
 
-\section{Kết luận}
+\subsection{Thiết kế và triển khai Giao diện người dùng (GUI)}
+
+Phần mềm "Lớp Học Thông Minh" được xây dựng trên nền tảng Web, cho phép người quản trị giám sát và điều khiển hệ thống thông qua mạng LoRa một cách trực quan từ bất kỳ thiết bị nào có kết nối Internet.
+
+\subsubsection{Luồng hoạt động tổng quan}
+Khi truy cập vào địa chỉ IP của máy chủ, người dùng sẽ tiếp cận màn hình chào (Landing Page). Tại đây, nút nhấn \textbf{"Bắt đầu"} đóng vai trò kích hoạt hệ thống và chuyển hướng người dùng sang Bảng điều khiển trung tâm (Dashboard).
+
+Tại màn hình chính, hệ thống cung cấp ba phân hệ chức năng riêng biệt (Hình \ref{fig:gui_main}):
+\begin{itemize}
+    \item \textbf{Giám sát Môi trường:} Theo dõi các chỉ số cảm biến theo thời gian thực.
+    \item \textbf{Điều khiển Thiết bị:} Quản lý trạng thái On/Off của các thiết bị điện.
+    \item \textbf{Điểm danh:} Quản lý danh sách sinh viên ra vào lớp (chức năng đang trong giai đoạn phát triển mở rộng).
+\end{itemize}
+
+\begin{figure}[h!]
+    \centering
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=1.0\linewidth]{z7334508086279_3f5a18d1b60c09068c1aae736692dbca.jpg} % Thay tên file ảnh màn hình Start
+        \caption{Màn hình khởi động hệ thống.}
+        \label{fig:gui_start}
+    \end{minipage}\hfill
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=1.0\linewidth]{z7334508080498_a25fbad2f102182c0666d0e4455047a9.jpg} % Thay tên file ảnh Menu chức năng
+        \caption{Bảng chọn chức năng chính.}
+        \label{fig:gui_menu}
+    \end{minipage}
+    \label{fig:gui_main}
+\end{figure}
+
+\subsubsection{Chức năng Giám sát Môi trường}
+Giao diện giám sát được thiết kế dạng Dashboard (Hình \ref{fig:gui_env}) với bố cục trực quan, bao gồm:
+\begin{itemize}
+    \item \textbf{Ô dữ liệu thời gian thực (Real-time Cards):} Hiển thị giá trị hiện tại của 5 thông số môi trường: Nhiệt độ ($^\circ C$), Độ ẩm ($\%$), Áp suất ($hPa$), Cường độ ánh sáng ($Lux$) và Nồng độ khí Gas ($ppm$).
+    \item \textbf{Biểu đồ lịch sử (Charts):} Bên dưới mỗi ô dữ liệu là biểu đồ đường thể hiện sự biến thiên của thông số đó trong 24 giờ qua. 
+    \begin{itemize}
+        \item Đối với Nhiệt độ, Độ ẩm, Áp suất và Ánh sáng: Biểu đồ hiển thị giá trị thực tế theo giờ.
+        \item Đối với Khí Gas: Để giảm nhiễu tín hiệu và phản ánh xu hướng tổng quát, biểu đồ hiển thị giá trị trung bình (Average) theo từng giờ thay vì giá trị tức thời.
+    \end{itemize}
+\end{itemize}
+
+Ngoài ra, thanh công cụ phía trên cho phép người dùng lọc dữ liệu theo phòng học (Phòng 1, Phòng 2...) và tùy chỉnh khoảng thời gian hiển thị (Hôm nay, 7 ngày qua, Tháng này hoặc Tùy chỉnh).
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\linewidth]{z7334508089292_6c843b4bac53c44824e07c59e083962f.jpg} % Thay tên file ảnh Giám sát môi trường
+    \caption{Giao diện chi tiết giám sát thông số môi trường.}
+    \label{fig:gui_env}
+\end{figure}
+
+\subsubsection{Chức năng Điều khiển Thiết bị}
+Giao diện điều khiển (Hình \ref{fig:gui_control}) cho phép người quản trị tương tác hai chiều với các thiết bị chấp hành tại phòng học thông qua Relay. Hệ thống hỗ trợ điều khiển 4 nhóm thiết bị chính: Đèn, Máy chiếu, Ổ điện và Điều hòa.
+
+Mỗi thiết bị được đại diện bởi một thẻ (Card) chứa nút gạt (Toggle Switch). Trạng thái của nút gạt trên giao diện sẽ đồng bộ với trạng thái thực tế của thiết bị, đảm bảo tính nhất quán của hệ thống.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\linewidth]{z7334508079262_1364140f1bfcfcb52c2b6b82fa9f2ab8.jpg} % Thay tên file ảnh Điều khiển thiết bị
+    \caption{Giao diện điều khiển thiết bị tập trung.}
+    \label{fig:gui_control}
+\end{figure}
+
+\section{Kết luận và Hướng phát triển}
+
+\subsection{Kết quả đạt được}
+Đồ án đã thiết kế và triển khai thành công hệ thống giám sát môi trường lớp học kết hợp điểm danh tự động, đáp ứng mục tiêu ban đầu về việc xây dựng mô hình IoT lai (Hybrid IoT architecture) giữa xử lý tại biên (Edge Computing) và truyền thông tầm xa (LoRa). Các kết quả cụ thể bao gồm:
+
+\begin{itemize}
+    \item \textbf{Về kiến trúc hệ thống:} Đã xây dựng thành công mô hình tính toán không đồng nhất, phân chia tác vụ hợp lý giữa NVIDIA Jetson Nano (xử lý AI nặng) và Raspberry Pi Pico (điều khiển thời gian thực). Cơ chế bảo mật dữ liệu bằng mã hóa AES-128 được tích hợp ngay tại biên, đảm bảo an toàn thông tin sinh viên trước khi truyền tải.
+    
+    \item \textbf{Về hiệu năng AI:} Mô hình nhận diện khuôn mặt sử dụng YOLOv8 kết hợp FaceNet (với chiến lược trích xuất ngắt quãng) hoạt động ổn định trên Jetson Nano. Tại độ phân giải $320 \times 240$, hệ thống đạt tốc độ xử lý trung bình \textbf{12.2 FPS}, đảm bảo khả năng nhận diện thời gian thực với độ chính xác cao (mAP50 đạt 0.96).
+    
+    \item \textbf{Về truyền thông LoRa:} Hệ thống truyền tin chứng minh được độ tin cậy tuyệt đối trong môi trường tòa nhà cao tầng. Với cấu hình SF12 và cơ chế truyền tin cậy (ACK/Retry), hệ thống đạt tỷ lệ chuyển gói tin (PDR) \textbf{100\%} xuyên qua kết cấu bê tông cốt thép, khắc phục hoàn toàn nhược điểm về vùng phủ sóng của mạng WiFi truyền thống.
+    
+    \item \textbf{Về ứng dụng quản lý:} Giao diện Dashboard trực quan kết nối với Firebase Realtime Database cho phép giám sát thông số môi trường và điều khiển thiết bị với độ trễ thấp (dưới 2 giây), mang lại trải nghiệm quản lý hiện đại và tiện lợi.
+\end{itemize}
+
+\subsection{Hạn chế của đề tài}
+Bên cạnh những kết quả đạt được, hệ thống vẫn tồn tại một số hạn chế cần khắc phục:
+\begin{itemize}
+    \item \textbf{Độ trễ truyền thông (Latency):} Do ưu tiên khả năng xuyên tường và độ tin cậy (sử dụng SF12 và Payload lớn $\approx 50$ bytes), thời gian khứ hồi (RTT) của hệ thống khá cao ($\approx 1.46s$). Điều này chưa tối ưu cho các tác vụ điều khiển yêu cầu phản hồi tức thì (Real-time control).
+    \item \textbf{Độ phân giải đầu vào:} Để đảm bảo FPS, hệ thống buộc phải giảm độ phân giải xuống $320 \times 240$, điều này có thể làm giảm khả năng nhận diện khuôn mặt ở khoảng cách xa (trên 3m).
+\end{itemize}
+
+\subsection{Hướng phát triển}
+Để hoàn thiện sản phẩm và hướng tới triển khai thực tế trên quy mô lớn (Smart Campus), nhóm đề xuất các hướng nghiên cứu tiếp theo:
+
+\begin{itemize}
+    \item \textbf{Tối ưu hóa mô hình AI:} Ứng dụng kỹ thuật lượng tử hóa (Quantization) và TensorRT để tăng tốc độ xử lý trên Jetson Nano, cho phép nâng cao độ phân giải đầu vào mà không làm giảm FPS.
+    \item \textbf{Nâng cấp giao thức truyền thông:} Nghiên cứu áp dụng nén dữ liệu trước khi truyền để giảm kích thước Payload, từ đó giảm Time-on-Air và độ trễ RTT. Ngoài ra, xem xét chuyển đổi sang giao thức LoRaWAN để hỗ trợ quản lý hàng nghìn Node thiết bị trong mạng lưới rộng lớn.
+    \item \textbf{Hoàn thiện tính năng Điểm danh:} Phát triển module quản lý điểm danh chuyên sâu trên Web App, bao gồm tính năng xuất báo cáo tự động, thống kê tỷ lệ vắng và tích hợp với hệ thống đào tạo của nhà trường.
+\end{itemize}
 \bibliographystyle{IEEEtran} % hoặc cái style bạn cần
 \bibliography{sample} % đúng tên file .bib của bạn
 \end{document}

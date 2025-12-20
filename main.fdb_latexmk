@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex main"] 1766189765.9263 "main.aux" "main.bbl" "main" 1766189778.07149 0
+["bibtex main"] 1766190585.69094 "main.aux" "main.bbl" "main" 1766190597.69653 0
   "./sample.bib" 1765891982 3165 0b3e38984bc5c5915e1d7376dc5d0fa5 ""
   "C:/Users/Thanh Nhan/AppData/Local/Programs/MiKTeX/bibtex/bst/ieeetran/IEEEtran.bst" 1440622569 57748 7c8250ecf02814ce6ddc0cdbb63df1dd ""
-  "main.aux" 1766189777 5612 c3c849cf812e6159dbbdc63f0ffe425c "pdflatex"
+  "main.aux" 1766190596 7593 e59e8f8bf1f5bcc365bf196ede1868a2 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1766189766.31154 "g:/DoAN_IOT/main.tex" "main.pdf" "main" 1766189778.07204 0
+["pdflatex"] 1766190586.02929 "g:/DoAN_IOT/main.tex" "main.pdf" "main" 1766190597.69709 0
   "C:/Users/Thanh Nhan/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1765921748 88371 b965f57369ed322039596060d18f4416 ""
   "C:/Users/Thanh Nhan/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm1200.pk" 1765921607 14064 8d2e8172a521bba0d8faa9b289bf2c43 ""
   "C:/Users/Thanh Nhan/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1765920549 13336009 42b58cbd3f56272fcbb35a833f5854ea ""
@@ -28,6 +28,7 @@
   "C:/Users/Thanh Nhan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb" 1247596667 36741 0ee9e374ec3e30da87cdfb0ea3575226 ""
   "C:/Users/Thanh Nhan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb" 1247596667 32722 d7379af29a190c3f453aba36302ff5a9 ""
   "C:/Users/Thanh Nhan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1247596667 32569 5e5ddc8df908dea60932f3c484a54c0d ""
+  "C:/Users/Thanh Nhan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb" 1247596667 32626 5abc8bb2f28aa647d4c70f8ea38cc0d3 ""
   "C:/Users/Thanh Nhan/AppData/Local/Programs/MiKTeX/fonts/type1/vntex/vnr/vnbx12.pfb" 1644004041 41089 cd085a6112214f1ec9535fe0d1ee127f ""
   "C:/Users/Thanh Nhan/AppData/Local/Programs/MiKTeX/fonts/type1/vntex/vnr/vnr12.pfb" 1644004041 40319 02110ade360715fbba33c66db50ef607 ""
   "C:/Users/Thanh Nhan/AppData/Local/Programs/MiKTeX/fonts/type1/vntex/vnr/vnti12.pfb" 1644004041 45761 648ecdc1078fdfee480e9a81aed1d127 ""
@@ -128,16 +129,24 @@
   "C:/Users/Thanh Nhan/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1729265222 55384 b454dec21c2d9f45ec0b793f0995b992 ""
   "Logo_Hutech.png" 1765891982 66517 971bda5496566ec0d5cc007eb5672d93 ""
   "SCH_Schematic1_1-P1_2025-12-17.png" 1765891982 215893 7a58552bd27ac8ccd502d8f4910efdc8 ""
-  "g:/DoAN_IOT/main.tex" 1766189753 28192 c0555064ae532801622a5466a1ce9093 ""
-  "main.aux" 1766189777 5612 c3c849cf812e6159dbbdc63f0ffe425c "pdflatex"
-  "main.bbl" 1766189766 2539 8e100323989576077a5aa0663a33afaf "bibtex main"
-  "main.tex" 1766189753 28192 c0555064ae532801622a5466a1ce9093 ""
-  "main.toc" 1766189777 2191 371694e11f3a31cd9d832ea06ffefd4d "pdflatex"
+  "g:/DoAN_IOT/main.tex" 1766190570 37440 82a9bec49cbd81d9f7f3af86bb92197c ""
+  "main.aux" 1766190596 7593 e59e8f8bf1f5bcc365bf196ede1868a2 "pdflatex"
+  "main.bbl" 1766190585 2539 8e100323989576077a5aa0663a33afaf "bibtex main"
+  "main.lof" 1766190596 1257 1b9c855c30645f20d70937dbd021ff4d "pdflatex"
+  "main.lot" 1766190596 309 654c3b2193e34dbfd2c29209c425784a "pdflatex"
+  "main.tex" 1766190570 37440 82a9bec49cbd81d9f7f3af86bb92197c ""
+  "main.toc" 1766190596 2959 65c5d1bdb7703fd293405de06e898390 "pdflatex"
   "rtt_plot.png" 1757504064 79932 f861452448e8277a8e8c308a38838ea7 ""
   "rtt_plot_2.png" 1757507847 107965 eb8f96857e5387011ae4f298a430ee73 ""
+  "z7334508079262_1364140f1bfcfcb52c2b6b82fa9f2ab8.jpg" 1766189900 63894 fb7fe8b31da65aa0cdff7200c5128ec7 ""
+  "z7334508080498_a25fbad2f102182c0666d0e4455047a9.jpg" 1766189890 68262 87fcc146dde0a0eb34339ee7bddf6c20 ""
+  "z7334508086279_3f5a18d1b60c09068c1aae736692dbca.jpg" 1766189886 92089 2372699e64a572167e4e29379d628123 ""
+  "z7334508089292_6c843b4bac53c44824e07c59e083962f.jpg" 1766189894 103134 0ec322273891a7b2c870ece26f03f7e6 ""
   (generated)
   "main.aux"
+  "main.lof"
   "main.log"
+  "main.lot"
   "main.pdf"
   "main.toc"
   (rewritten before read)

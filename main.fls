@@ -207,6 +207,14 @@ INPUT .\main.toc
 INPUT .\main.toc
 INPUT main.toc
 OUTPUT main.toc
+INPUT .\main.lof
+INPUT .\main.lof
+INPUT main.lof
+OUTPUT main.lof
+INPUT .\main.lot
+INPUT .\main.lot
+INPUT main.lot
+OUTPUT main.lot
 INPUT C:\Users\Thanh Nhan\AppData\Local\Programs\MiKTeX\fonts\tfm\vntex\vnr\vnr12.tfm
 INPUT C:\Users\Thanh Nhan\AppData\Local\Programs\MiKTeX\fonts\tfm\vntex\vnr\vnbx12.tfm
 INPUT .\Báo cáo Khoa học-TT-TK-HARDWARE (4).png
@@ -253,6 +261,34 @@ INPUT .\rtt_plot_2.png
 INPUT .\rtt_plot_2.png
 INPUT .\rtt_plot_2.png
 INPUT .\rtt_plot_2.png
+INPUT .\z7334508086279_3f5a18d1b60c09068c1aae736692dbca.jpg
+INPUT .\z7334508086279_3f5a18d1b60c09068c1aae736692dbca.jpg
+INPUT .\z7334508086279_3f5a18d1b60c09068c1aae736692dbca.jpg
+INPUT .\z7334508086279_3f5a18d1b60c09068c1aae736692dbca.jpg
+INPUT .\z7334508086279_3f5a18d1b60c09068c1aae736692dbca.jpg
+INPUT .\z7334508086279_3f5a18d1b60c09068c1aae736692dbca.jpg
+INPUT .\z7334508086279_3f5a18d1b60c09068c1aae736692dbca.jpg
+INPUT .\z7334508080498_a25fbad2f102182c0666d0e4455047a9.jpg
+INPUT .\z7334508080498_a25fbad2f102182c0666d0e4455047a9.jpg
+INPUT .\z7334508080498_a25fbad2f102182c0666d0e4455047a9.jpg
+INPUT .\z7334508080498_a25fbad2f102182c0666d0e4455047a9.jpg
+INPUT .\z7334508080498_a25fbad2f102182c0666d0e4455047a9.jpg
+INPUT .\z7334508080498_a25fbad2f102182c0666d0e4455047a9.jpg
+INPUT .\z7334508080498_a25fbad2f102182c0666d0e4455047a9.jpg
+INPUT .\z7334508089292_6c843b4bac53c44824e07c59e083962f.jpg
+INPUT .\z7334508089292_6c843b4bac53c44824e07c59e083962f.jpg
+INPUT .\z7334508089292_6c843b4bac53c44824e07c59e083962f.jpg
+INPUT .\z7334508089292_6c843b4bac53c44824e07c59e083962f.jpg
+INPUT .\z7334508089292_6c843b4bac53c44824e07c59e083962f.jpg
+INPUT .\z7334508089292_6c843b4bac53c44824e07c59e083962f.jpg
+INPUT .\z7334508089292_6c843b4bac53c44824e07c59e083962f.jpg
+INPUT .\z7334508079262_1364140f1bfcfcb52c2b6b82fa9f2ab8.jpg
+INPUT .\z7334508079262_1364140f1bfcfcb52c2b6b82fa9f2ab8.jpg
+INPUT .\z7334508079262_1364140f1bfcfcb52c2b6b82fa9f2ab8.jpg
+INPUT .\z7334508079262_1364140f1bfcfcb52c2b6b82fa9f2ab8.jpg
+INPUT .\z7334508079262_1364140f1bfcfcb52c2b6b82fa9f2ab8.jpg
+INPUT .\z7334508079262_1364140f1bfcfcb52c2b6b82fa9f2ab8.jpg
+INPUT .\z7334508079262_1364140f1bfcfcb52c2b6b82fa9f2ab8.jpg
 INPUT .\main.bbl
 INPUT .\main.bbl
 INPUT main.bbl
@@ -265,6 +301,8 @@ INPUT C:\Users\Thanh Nhan\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfo
 INPUT C:\Users\Thanh Nhan\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr12.pfb
 INPUT C:\Users\Thanh Nhan\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmsy10.pfb
 INPUT C:\Users\Thanh Nhan\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmsy10.pfb
+INPUT C:\Users\Thanh Nhan\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmsy8.pfb
+INPUT C:\Users\Thanh Nhan\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmsy8.pfb
 INPUT C:\Users\Thanh Nhan\AppData\Local\Programs\MiKTeX\fonts\type1\vntex\vnr\vnbx12.pfb
 INPUT C:\Users\Thanh Nhan\AppData\Local\Programs\MiKTeX\fonts\type1\vntex\vnr\vnbx12.pfb
 INPUT C:\Users\Thanh Nhan\AppData\Local\Programs\MiKTeX\fonts\type1\vntex\vnr\vnr12.pfb
