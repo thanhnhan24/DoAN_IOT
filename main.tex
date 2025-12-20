@@ -200,8 +200,111 @@ Một điểm nhấn quan trọng của hệ thống là cơ chế bảo mật d
 
 Việc kết hợp xử lý AI tại biên và mã hóa dữ liệu trước truyền thông giúp hệ thống vừa đảm bảo độ trễ thấp, vừa nâng cao mức độ riêng tư và an toàn thông tin. Kiến trúc này đặc biệt phù hợp với các ứng dụng Smart Campus, nơi yêu cầu cao về bảo mật dữ liệu cá nhân và khả năng mở rộng hệ thống.
 
+\subsubsection{Giải thuật điều khiển và truyền thông tại Node (Raspberry Pi Pico)}
+
+Để đảm bảo khả năng xử lý đa nhiệm trên vi điều khiển đơn nhân, phần mềm trên Raspberry Pi Pico được thiết kế theo kiến trúc vòng lặp không chặn (Non-blocking I/O) kết hợp với máy trạng thái (State Machine). Lưu đồ giải thuật chi tiết được trình bày trong Hình \ref{fig:pico_algorithm}.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1.0\linewidth]{Báo cáo Khoa học-TT-TK-Control and communication algorithms at Node (Raspberry Pi Pico) (1).png} % Thay đường dẫn ảnh của bạn vào đây
+    \caption{Lưu đồ giải thuật xử lý đa nhiệm và truyền tin cậy tại Raspberry Pi Pico.}
+    \label{fig:pico_algorithm}
+\end{figure}
+
+Quy trình hoạt động của hệ thống được chia thành ba luồng xử lý chính trong vòng lặp vô hạn (Main Loop):
+
+\begin{itemize}
+    \item \textbf{Luồng xử lý dữ liệu AI (Uplink Priority):}
+    Đây là tác vụ có độ ưu tiên cao nhất. Pico liên tục kiểm tra bộ đệm UART kết nối với Jetson Nano. Khi nhận được chuỗi dữ liệu (MSSV đã mã hóa), hệ thống thực hiện quy trình \textit{Gửi tin cậy (Reliable Transmission)}:
+    \begin{enumerate}
+        \item Gửi gói tin qua module LoRa (Transmitting Mode).
+        \item Chuyển ngay sang chế độ \textit{Listening Mode} và kích hoạt bộ định thời (Timer).
+        \item Chờ tín hiệu xác nhận (ACK) từ Gateway trong khoảng thời gian Timeout ($2000ms$).
+        \item \textbf{Cơ chế thử lại (Retry Logic):} Nếu hết thời gian Timeout mà không nhận được ACK, hệ thống sẽ tự động gửi lại gói tin. Quá trình này lặp lại tối đa 3 lần ($Maximum \: attempts = 3$).
+        \item \textbf{Chế độ ngoại tuyến (Offline Mode):} Nếu sau 3 lần gửi thất bại, dữ liệu sẽ được lưu vào bộ nhớ (Flash/EEPROM) để gửi lại sau, đảm bảo không mất mát dữ liệu điểm danh.
+    \end{enumerate}
+    
+    \item \textbf{Luồng điều khiển thiết bị (Downlink):}
+    Nếu không có dữ liệu từ Jetson, Pico kiểm tra tín hiệu đến từ Gateway (GUI). Gói tin nhận được sẽ được giải mã (Decryption). Nếu xác thực đúng lệnh điều khiển, Pico sẽ thay đổi trạng thái GPIO để đóng/ngắt Relay điều khiển thiết bị ngoại vi.
+    
+    \item \textbf{Luồng giám sát môi trường (Periodic Task):}
+    Trong trường hợp không có sự kiện ngắt nào xảy ra, hệ thống thực hiện đóng gói dữ liệu từ các cảm biến (Nhiệt độ, độ ẩm, điện năng) và gửi định kỳ về Gateway để cập nhật Dashboard.
+\end{itemize}
+
+Việc áp dụng cơ chế xác thực ACK và lưu trữ cục bộ giúp hệ thống duy trì độ tin cậy cao ngay cả trong điều kiện môi trường truyền dẫn vô tuyến không ổn định.
 
 \section{Kết quả thực nghiệm}
+\subsection{Hiệu năng thực tế trên Jetson Nano}
+Để tìm ra cấu hình tối ưu cho thiết bị biên, nhóm nghiên cứu đã tiến hành đo đạc tốc độ xử lý (FPS) tại ba mức độ phân giải đầu vào khác nhau. Đặc biệt, thuật toán FaceNet được tối ưu hóa bằng cách chỉ kích hoạt trích xuất đặc trưng một lần mỗi 30 khung hình (hoặc khi đối tượng đứng yên), giúp giảm tải tính toán.
+
+Kết quả thực nghiệm được tổng hợp trong Bảng \ref{tab:fps_comparison}:
+
+\begin{table}[h!]
+    \centering
+    \caption{So sánh hiệu năng xử lý tại các độ phân giải khác nhau trên Jetson Nano}
+    \label{tab:fps_comparison}
+    \renewcommand{\arraystretch}{1.3} % Tăng khoảng cách dòng cho dễ đọc
+    \begin{tabular}{|c|c|p{8.5cm}|}
+        \hline
+        \textbf{Độ phân giải (px)} & \textbf{FPS trung bình} & \textbf{Đánh giá khả năng đáp ứng} \\ 
+        \hline
+        $640 \times 480$ & $< 6.0$ & \textbf{Thấp.} Video bị giật lag, độ trễ cao, gây khó khăn cho việc nhận diện khi đối tượng di chuyển nhanh. \\ 
+        \hline
+        $480 \times 320$ & $8.4$ & \textbf{Trung bình.} Hiệu năng có cải thiện nhưng chưa đảm bảo độ mượt mà khi có nhiều khuôn mặt xuất hiện cùng lúc. \\ 
+        \hline
+        \textbf{$320 \times 240$} & \textbf{12.2} & \textbf{Tốt.} Video mượt mà, độ trễ thấp. Với sự hỗ trợ của cơ chế FaceNet ngắt quãng (1 lần/30 frames), độ chính xác vẫn được đảm bảo trong khi tài nguyên CPU được giải phóng cho các tác vụ nền. \\ 
+        \hline
+    \end{tabular}
+\end{table}
+
+\textbf{Kết luận:} Dựa trên Bảng \ref{tab:fps_comparison}, nhóm quyết định lựa chọn độ phân giải \textbf{$320 \times 240$} làm cấu hình triển khai chính thức cho hệ thống.
+
+\subsection{Kết quả đánh giá truyền thông LoRa}
+
+Để đánh giá hiệu năng thực tế của hệ thống truyền thông LoRa, nhóm nghiên cứu đã tiến hành hai đợt thử nghiệm độc lập và thu thập dữ liệu về thời gian khứ hồi (Round Trip Time - RTT). Các tham số cấu hình LoRa được thiết lập gồm: Spreading Factor (SF) 12, băng thông (Bandwidth) 125 kHz, Coding Rate 4/5 và kích thước tải trọng (payload) dao động quanh mức 50 byte.
+
+Biểu đồ biến thiên của RTT theo thời gian trong hai đợt thử nghiệm được thể hiện lần lượt trong Hình \ref{fig:rtt_test1} và Hình \ref{fig:rtt_test2}.
+
+\begin{figure}[h!]
+    \centering
+    % Thay đường dẫn file ảnh tương ứng của bạn
+    \includegraphics[width=1.0\linewidth]{rtt_plot.png} 
+    \caption{Biểu đồ RTT theo thời gian - Lượt thử nghiệm 1 (Thời gian đo: 2 giờ).}
+    \label{fig:rtt_test1}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    % Thay đường dẫn file ảnh tương ứng của bạn
+    \includegraphics[width=1.0\linewidth]{rtt_plot_2.png} 
+    \caption{Biểu đồ RTT theo thời gian - Lượt thử nghiệm 2 (Thời gian đo: 55 phút).}
+    \label{fig:rtt_test2}
+\end{figure}
+
+Kết quả đo đạc cho thấy RTT trung bình luôn duy trì trong khoảng $1,45$ đến $1,46$ giây. Trong toàn bộ quá trình đo, hệ thống không ghi nhận bất kỳ trường hợp mất gói tin nào, dẫn đến tỷ lệ chuyển gói thành công (Packet Delivery Ratio - PDR) đạt mức tuyệt đối 100\%. Payload trung bình xấp xỉ 49 byte, phản ánh đúng kích thước gói tin ứng dụng được định dạng trong hệ thống (bao gồm tiêu đề, dữ liệu cảm biến và mã hóa).
+
+Bảng \ref{tab:lora_results} dưới đây tóm tắt các chỉ số hiệu năng chính thu được từ hai lượt thử nghiệm:
+
+\begin{table}[h!]
+    \centering
+    \caption{Tổng hợp kết quả thử nghiệm hiệu năng mạng LoRa}
+    \label{tab:lora_results}
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{|c|c|c|c|c|c|}
+        \hline
+        \textbf{Lượt test} & \textbf{\begin{tabular}[c]{@{}c@{}}RTT TB\\ (ms)\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}PDR\\ (\%)\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Payload TB\\ (byte)\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Thời lượng\\ (giây)\end{tabular}} & \textbf{Số mẫu} \\ \hline
+        1 & 1454,70 & 100 & 49,3 & 7200 (2h) & 4945 \\ \hline
+        2 & 1461,99 & 100 & 49,5 & 3294 (55m) & 2252 \\ \hline
+    \end{tabular}
+\end{table}
+
+\textbf{Đánh giá và Thảo luận:}
+\begin{itemize}
+    \item \textbf{Độ ổn định:} RTT của hệ thống có độ ổn định cao, dao động chủ yếu trong khoảng $\pm 200$ ms quanh giá trị trung bình. Mức dao động này là chấp nhận được đối với giao thức truyền thông vô tuyến tầm xa.
+    \item \textbf{Độ tin cậy:} Với PDR đạt 100\% trong cả hai kịch bản (với tổng số mẫu hơn 7000 gói tin), hệ thống chứng minh được mức độ tin cậy rất tốt, đảm bảo không thất thoát dữ liệu điểm danh quan trọng.
+    \item \textbf{Độ trễ (Latency):} Việc sử dụng SF12 (để tối ưu khoảng cách truyền và khả năng xuyên tường) kết hợp với payload lớn (~50 byte) làm tăng thời gian truyền sóng (Time-on-Air), dẫn đến RTT ở mức cao (~1,45s). Tuy nhiên, kết quả này hoàn toàn đáp ứng được yêu cầu của bài toán thu thập dữ liệu môi trường và điểm danh sinh viên, vốn không đòi hỏi độ trễ cực thấp (Ultra-low latency) như các ứng dụng điều khiển thời gian thực.
+\end{itemize}
+
 \section{Kết luận}
 \bibliographystyle{IEEEtran} % hoặc cái style bạn cần
 \bibliography{sample} % đúng tên file .bib của bạn

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.17)  17 DEC 2025 05:51
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.17)  20 DEC 2025 07:16
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -660,24 +660,58 @@ Package pdftex.def Info: Báo cáo Khoa học-TT-TK-Edge AI Processing Algorithm
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[8] (main.bbl [9 <./Báo cáo Khoa học-TT-TK-Edge AI Processing Algorithm (3).png>]) [10] (main.aux)
+[8]
+<Báo cáo Khoa học-TT-TK-Control and communication algorithms at Node (Raspberry Pi Pico) (1).png, id=42, 9199.36874pt x 4737.7pt>
+File: Báo cáo Khoa học-TT-TK-Control and communication algorithms at Node (Raspberry Pi Pico) (1).png Graphic file (type png)
+<use Báo cáo Khoa học-TT-TK-Control and communication algorithms at Node (Raspberry Pi Pico) (1).png>
+Package pdftex.def Info: Báo cáo Khoa học-TT-TK-Control and communication algorithms at Node (Raspberry Pi Pico) (1).png  used on input line 209.
+(pdftex.def)             Requested size: 441.01773pt x 227.06725pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[9 <./Báo cáo Khoa học-TT-TK-Edge AI Processing Algorithm (3).png>] [10 <./Báo cáo Khoa học-TT-TK-Control and communication algorithms at Node (Raspberry Pi Pico) (1).png>]
+Overfull \hbox (34.97673pt too wide) in paragraph at lines 247--258
+ [][] 
+ []
+
+<rtt_plot.png, id=53, 867.24pt x 361.35pt>
+File: rtt_plot.png Graphic file (type png)
+<use rtt_plot.png>
+Package pdftex.def Info: rtt_plot.png  used on input line 271.
+(pdftex.def)             Requested size: 441.01773pt x 183.75674pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<rtt_plot_2.png, id=54, 867.24pt x 361.35pt>
+File: rtt_plot_2.png Graphic file (type png)
+<use rtt_plot_2.png>
+Package pdftex.def Info: rtt_plot_2.png  used on input line 279.
+(pdftex.def)             Requested size: 441.01773pt x 183.75674pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[11] [12 <./rtt_plot.png> <./rtt_plot_2.png>] (main.bbl) [13] (main.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-11-06>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 14360 strings out of 467870
- 294132 string characters out of 5415898
- 681872 words of memory out of 5000000
- 42994 multiletter control sequences out of 15000+600000
+ 14390 strings out of 467870
+ 295355 string characters out of 5415898
+ 685985 words of memory out of 5000000
+ 43024 multiletter control sequences out of 15000+600000
  637476 words of font info for 57 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 84i,8n,104p,1239b,373s stack positions out of 10000i,1000n,20000p,200000b,200000s
- <C:\Users\Thanh Nhan\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk><C:/Users/Thanh Nhan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/Thanh Nhan/AppData/Local/Programs/MiKTeX/fonts/type1/vntex/vnr/vnbx12.pfb><C:/Users/Thanh Nhan/AppData/Local/Programs/MiKTeX/fonts/type1/vntex/vnr/vnr12.pfb><C:/Users/Thanh Nhan/AppData/Local/Programs/MiKTeX/fonts/type1/vntex/vnr/vnti12.pfb>
-Output written on main.pdf (10 pages, 2097879 bytes).
+ 84i,14n,104p,1239b,373s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <C:\Users\Thanh Nhan\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk><C:/Users/Thanh Nhan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/Thanh Nhan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/Thanh Nhan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Thanh Nhan/AppData/Local/Programs/MiKTeX/fonts/type1/vntex/vnr/vnbx12.pfb><C:/Users/Thanh Nhan/AppData/Local/Programs/MiKTeX/fonts/type1/vntex/vnr/vnr12.pfb><C:/Users/Thanh Nhan/AppData/Local/Programs/MiKTeX/fonts/type1/vntex/vnr/vnti12.pfb>
+Output written on main.pdf (13 pages, 2951648 bytes).
 PDF statistics:
- 72 PDF objects out of 1000 (max. 8388607)
+ 98 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 33 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 48 words of extra memory for PDF output out of 10000 (max. 10000000)
 
