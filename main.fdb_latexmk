@@ -1,14 +1,14 @@
 # Fdb version 4
-["bibtex main"] 1766190585.69094 "main.aux" "main.bbl" "main" 1766190597.69653 0
+["bibtex main"] 1767337499.17989 "main.aux" "main.bbl" "main" 1767337511.01538 0
   "./sample.bib" 1765891982 3165 0b3e38984bc5c5915e1d7376dc5d0fa5 ""
   "C:/Users/Thanh Nhan/AppData/Local/Programs/MiKTeX/bibtex/bst/ieeetran/IEEEtran.bst" 1440622569 57748 7c8250ecf02814ce6ddc0cdbb63df1dd ""
-  "main.aux" 1766190596 7593 e59e8f8bf1f5bcc365bf196ede1868a2 "pdflatex"
+  "main.aux" 1767337510 7593 e59e8f8bf1f5bcc365bf196ede1868a2 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1766190586.02929 "g:/DoAN_IOT/main.tex" "main.pdf" "main" 1766190597.69709 0
-  "C:/Users/Thanh Nhan/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1765921748 88371 b965f57369ed322039596060d18f4416 ""
+["pdflatex"] 1767337499.50937 "g:/DoAN_IOT/main.tex" "main.pdf" "main" 1767337511.01609 0
+  "C:/Users/Thanh Nhan/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1767337365 88371 b965f57369ed322039596060d18f4416 ""
   "C:/Users/Thanh Nhan/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm1200.pk" 1765921607 14064 8d2e8172a521bba0d8faa9b289bf2c43 ""
   "C:/Users/Thanh Nhan/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1765920549 13336009 42b58cbd3f56272fcbb35a833f5854ea ""
   "C:/Users/Thanh Nhan/AppData/Local/Programs/MiKTeX/fonts/tfm/jknappen/ec/tcrm1200.tfm" 993062508 1444 95ffe0f19b974d50849790c8225c7ef7 ""
@@ -129,13 +129,13 @@
   "C:/Users/Thanh Nhan/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1729265222 55384 b454dec21c2d9f45ec0b793f0995b992 ""
   "Logo_Hutech.png" 1765891982 66517 971bda5496566ec0d5cc007eb5672d93 ""
   "SCH_Schematic1_1-P1_2025-12-17.png" 1765891982 215893 7a58552bd27ac8ccd502d8f4910efdc8 ""
-  "g:/DoAN_IOT/main.tex" 1766190570 37440 82a9bec49cbd81d9f7f3af86bb92197c ""
-  "main.aux" 1766190596 7593 e59e8f8bf1f5bcc365bf196ede1868a2 "pdflatex"
-  "main.bbl" 1766190585 2539 8e100323989576077a5aa0663a33afaf "bibtex main"
-  "main.lof" 1766190596 1257 1b9c855c30645f20d70937dbd021ff4d "pdflatex"
-  "main.lot" 1766190596 309 654c3b2193e34dbfd2c29209c425784a "pdflatex"
-  "main.tex" 1766190570 37440 82a9bec49cbd81d9f7f3af86bb92197c ""
-  "main.toc" 1766190596 2959 65c5d1bdb7703fd293405de06e898390 "pdflatex"
+  "g:/DoAN_IOT/main.tex" 1767337487 37440 82a9bec49cbd81d9f7f3af86bb92197c ""
+  "main.aux" 1767337510 7593 e59e8f8bf1f5bcc365bf196ede1868a2 "pdflatex"
+  "main.bbl" 1767337499 2539 8e100323989576077a5aa0663a33afaf "bibtex main"
+  "main.lof" 1767337510 1257 1b9c855c30645f20d70937dbd021ff4d "pdflatex"
+  "main.lot" 1767337510 309 654c3b2193e34dbfd2c29209c425784a "pdflatex"
+  "main.tex" 1767337487 37440 82a9bec49cbd81d9f7f3af86bb92197c ""
+  "main.toc" 1767337510 2959 65c5d1bdb7703fd293405de06e898390 "pdflatex"
   "rtt_plot.png" 1757504064 79932 f861452448e8277a8e8c308a38838ea7 ""
   "rtt_plot_2.png" 1757507847 107965 eb8f96857e5387011ae4f298a430ee73 ""
   "z7334508079262_1364140f1bfcfcb52c2b6b82fa9f2ab8.jpg" 1766189900 63894 fb7fe8b31da65aa0cdff7200c5128ec7 ""
